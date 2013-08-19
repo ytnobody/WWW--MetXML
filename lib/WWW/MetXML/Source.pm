@@ -26,28 +26,48 @@ sub _fetch_xml {
 
 sub sources {
     my $self = shift;
-    return $self->{xpath}->find('/sources/source');
+    my $sources = $self->{xpath}->find('/sources/source');
+    my @rtn;
+    while (my $row = $sources->shift) {
+        push @rtn, WWW::MetXML::Source::Data->new($row);
+    }
+    return @rtn;
 }
 
 sub source {
     my ($self, $id) = @_;
     my $query = sprintf('/sources/source[@id="%s"]', $id);
-    return $self->{xpath}->find($query)->shift;
+    my $row = $self->{xpath}->find($query)->shift;
+    return WWW::MetXML::Source::Data->new($row);
 }
 
 sub source_ids {
     my $self = shift;
-    my $sources = $self->sources;
-    my @rtn;
-    while ( my $source = $sources->shift ) {
-        push @rtn, $source->getAttribute('id');
-    }
-    return @rtn;
+    my @sources = $self->sources;
+    return map {$_->id} @sources;
 }
 
-sub id_to_name {
-    my ($self, $id) = @_;
-    my $source = $self->source($id);
+sub geo_to_source_ids {
+    my ($self, %geo) = @_;
+    my $lat = $geo{lat};
+    my $lon = $geo{lon};
+}
+
+package WWW::MetXML::Source::Data;
+
+sub new {
+    my ($class, $source) = @_;
+    bless { source => $source }, $class;
+}
+
+sub id {
+    my $self = shift;
+    $self->{source}->getAttribute('id');
+}
+
+sub name {
+    my $self = shift;
+    my $source = $self->{source};
     my $childs = $source->getChildNodes;
     for my $child (@$childs) {
         next unless $child->getName;
@@ -56,9 +76,9 @@ sub id_to_name {
     }
 }
 
-sub id_to_geo {
-    my ($self, $id) = @_;
-    my $source = $self->source($id);
+sub geo {
+    my $self = shift;
+    my $source = $self->{source};
     my $childs = $source->getChildNodes;
     for my $child (@$childs) {
         next unless $child->getName;
