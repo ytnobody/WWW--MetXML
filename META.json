@@ -43,6 +43,8 @@
       "runtime" : {
          "requires" : {
             "Furl" : "0",
+            "Geo::Coordinates::Converter" : "0",
+            "URI" : "0",
             "XML::XPath" : "0",
             "perl" : "5.008005"
          }
