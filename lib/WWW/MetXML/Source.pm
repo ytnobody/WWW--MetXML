@@ -50,8 +50,20 @@ sub id_to_name {
     my $source = $self->source($id);
     my $childs = $source->getChildNodes;
     for my $child (@$childs) {
+        next unless $child->getName;
         next unless $child->getName eq 'name';
         return $child->string_value;
+    }
+}
+
+sub id_to_geo {
+    my ($self, $id) = @_;
+    my $source = $self->source($id);
+    my $childs = $source->getChildNodes;
+    for my $child (@$childs) {
+        next unless $child->getName;
+        next unless $child->getName eq 'area';
+        return +{ map {($_ => $child->getAttribute($_))} qw/nw_lat nw_lon se_lat se_lon/ };
     }
 }
 

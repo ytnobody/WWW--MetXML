@@ -54,5 +54,16 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/ytnobody/WWW--MetXML/issues"
+      },
+      "homepage" : "https://github.com/ytnobody/WWW--MetXML",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/ytnobody/WWW--MetXML.git",
+         "web" : "https://github.com/ytnobody/WWW--MetXML"
+      }
+   },
    "version" : "0.01"
 }
