@@ -10,7 +10,7 @@ our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/sourcelist.xml';
 sub new {
     my ($class, %opts) = @_;
     my $self = $class->SUPER::new(%opts);
-    my $xml_url = $opts{base_url} || $base_url;
+    my $xml_url = $self->{base_url} || $base_url;
     $self->{xpath} = $self->fetch_xml($xml_url);
     return $self;
 }

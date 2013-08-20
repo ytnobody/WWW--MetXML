@@ -2,36 +2,8 @@ package WWW::MetXML::Source::Data;
 use strict;
 use warnings;
 use parent 'WWW::MetXML::Component::Data';
-
-sub name {
-    my $self = shift;
-    my $source = $self->{source};
-    my $childs = $source->getChildNodes;
-    for my $child (@$childs) {
-        next unless $child->getName;
-        next unless $child->getName eq 'name';
-        return $child->string_value;
-    }
-}
-
-sub cover_geo {
-    my $self = shift;
-    my $source = $self->{source};
-    my $childs = $source->getChildNodes;
-    for my $child (@$childs) {
-        next unless $child->getName;
-        next unless $child->getName eq 'area';
-        my $nw_point = $self->coordinates(
-            lat    => $child->getAttribute('nw_lat'),
-            lng    => $child->getAttribute('nw_lon'),
-        );
-        my $se_point = $self->coordinates(
-            lat    => $child->getAttribute('se_lat'),
-            lng    => $child->getAttribute('se_lon'),
-        );
-        return +{ nw => $nw_point, se => $se_point };
-    }
-}
+use WWW::MetXML::Role::Data::Name;
+use WWW::MetXML::Role::Data::CoverGeo;
 
 1;
 
