@@ -12,10 +12,15 @@ sub new {
     bless {%opts}, $class;
 }
 
+sub lang {
+    my $self = shift;
+    return $self->{lang} || 'en';
+}
+
 sub fetch_xml {
     my ($self, $url, %params) = @_;
     my $uri = URI->new($url);
-    $uri->query_form(%params);
+    $uri->query_form(%params, lang => $self->lang);
     my $res = $self->agent->get($uri->as_string);
     croak($res->status_line) unless $res->is_success;
     return $self->xml($res->content);

@@ -12,8 +12,7 @@ sub new {
     my ($class, %opts) = @_;
     my $self = $class->SUPER::new(%opts);
     my $xml_url = $opts{base_url} || $base_url;
-    my %params = (lang => delete $opts{lang} || 'en');
-    $self->{xpath} = $self->fetch_xml($xml_url, %params);
+    $self->{xpath} = $self->fetch_xml($xml_url);
     return $self;
 }
 
