@@ -38,4 +38,7 @@ is_deeply($chantaburi->cover_geo, {
 my @avail = $amedas->items_by_geo(lat => '40.0', lng => '140.55');
 is join(',', map{$_->name} @avail), 'Akitaken';
 
+my $mixed = WWW::MetXML::Region->new(source => [qw/amedas ThaiFs/]);
+is $mixed->items, 75;
+
 done_testing;
