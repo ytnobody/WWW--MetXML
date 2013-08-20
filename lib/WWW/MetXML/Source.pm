@@ -3,7 +3,6 @@ use strict;
 use warnings;
 
 use parent 'WWW::MetXML::Component';
-use WWW::MetXML::Source::Data;
 
 our $VERSION = "0.01";
 our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/sourcelist.xml';
@@ -21,7 +20,7 @@ sub sources {
     my $sources = $self->{xpath}->find('/sources/source');
     my @rtn;
     while (my $row = $sources->shift) {
-        push @rtn, WWW::MetXML::Source::Data->new($row);
+        push @rtn, $self->data_object($row);
     }
     return @rtn;
 }
@@ -30,7 +29,7 @@ sub source {
     my ($self, $id) = @_;
     my $query = sprintf('/sources/source[@id="%s"]', $id);
     my $row = $self->{xpath}->find($query)->shift;
-    return WWW::MetXML::Source::Data->new($row);
+    return $self->data_object($row);
 }
 
 sub source_ids {
