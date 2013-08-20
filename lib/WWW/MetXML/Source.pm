@@ -4,7 +4,6 @@ use warnings;
 
 use parent 'WWW::MetXML::Component';
 use WWW::MetXML::Source::Data;
-use URI;
 
 our $VERSION = "0.01";
 our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/sourcelist.xml';
@@ -12,9 +11,9 @@ our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/sourcelist.xml';
 sub new {
     my ($class, %opts) = @_;
     my $self = $class->SUPER::new(%opts);
-    my $xml_url = URI->new($opts{base_url} || $base_url);
-    $xml_url->query_form(lang => delete $opts{lang} || 'en');
-    $self->{xpath} = $self->fetch_xml($xml_url->as_string);
+    my $xml_url = $opts{base_url} || $base_url;
+    my %params = (lang => delete $opts{lang} || 'en');
+    $self->{xpath} = $self->fetch_xml($xml_url, %params);
     return $self;
 }
 

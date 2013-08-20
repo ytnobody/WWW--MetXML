@@ -4,6 +4,7 @@ use warnings;
 use WWW::MetXML::Role::Agent;
 use WWW::MetXML::Role::Coordinates;
 use WWW::MetXML::Role::XML;
+use URI;
 use Carp;
 
 sub new {
@@ -12,8 +13,10 @@ sub new {
 }
 
 sub fetch_xml {
-    my ($self, $url) = @_;
-    my $res = $self->agent->get($url);
+    my ($self, $url, %params) = @_;
+    my $uri = URI->new($url);
+    $uri->query_form(%params);
+    my $res = $self->agent->get($uri->as_string);
     croak($res->status_line) unless $res->is_success;
     return $self->xml($res->content);
 }
