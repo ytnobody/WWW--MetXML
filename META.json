@@ -1,7 +1,7 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Perl Interface of MetXML(MetBroker XML)",
    "author" : [
-      "ytnobody <ytnobody@gmail.com>"
+      "narc.affrc.go.jp/metbroker/xml/>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v0.5.5, CPAN::Meta::Converter version 2.130880",
@@ -67,5 +67,8 @@
          "web" : "https://github.com/ytnobody/WWW--MetXML"
       }
    },
-   "version" : "0.01"
+   "version" : "0.01",
+   "x_contributors" : [
+      "ytnobody <ytnobody@gmail.com>"
+   ]
 }
