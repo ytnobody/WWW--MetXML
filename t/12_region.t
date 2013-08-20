@@ -4,15 +4,15 @@ use Test::More;
 use WWW::MetXML::Region;
 use Geo::Coordinates::Converter::Point;
 
-my $wmr = WWW::MetXML::Region->new(lang => 'en', source => 'amedas');
-isa_ok $wmr, 'WWW::MetXML::Region';
-can_ok $wmr, qw/items item item_ids items_by_geo/;
+my $amedas = WWW::MetXML::Region->new(lang => 'en', source => 'amedas');
+isa_ok $amedas, 'WWW::MetXML::Region';
+can_ok $amedas, qw/items item item_ids items_by_geo/;
 
-my @items = $wmr->items;
+my @items = $amedas->items;
 is @items, 47;
 isa_ok $items[0], 'WWW::MetXML::Region::Data';
 
-my $item = $wmr->item('02');
+my $item = $amedas->item('02');
 isa_ok $item, 'WWW::MetXML::Region::Data';
 is $item->name, 'Aomoriken';
 
@@ -35,5 +35,7 @@ is_deeply($chantaburi->cover_geo, {
     se => Geo::Coordinates::Converter::Point->new({lat => "NaN", lng => "NaN", datum => 'wgs84', format => 'degree' }),
 });
 
+my @avail = $amedas->items_by_geo(lat => '40.0', lng => '140.55');
+is join(',', map{$_->name} @avail), 'Akitaken';
 
 done_testing;
