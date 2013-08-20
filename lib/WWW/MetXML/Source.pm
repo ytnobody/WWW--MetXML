@@ -3,6 +3,8 @@ use strict;
 use warnings;
 
 use parent 'WWW::MetXML::Component';
+use WWW::MetXML::Role::Items;
+use WWW::MetXML::Role::ItemsByGeo
 
 our $VERSION = "0.01";
 our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/sourcelist.xml';
@@ -15,39 +17,9 @@ sub new {
     return $self;
 }
 
-sub sources {
-    my $self = shift;
-    my $sources = $self->{xpath}->find('/sources/source');
-    my @rtn;
-    while (my $row = $sources->shift) {
-        push @rtn, $self->data_object($row);
-    }
-    return @rtn;
-}
+sub items_query { '/sources/source' }
 
-sub source {
-    my ($self, $id) = @_;
-    my $query = sprintf('/sources/source[@id="%s"]', $id);
-    my $row = $self->{xpath}->find($query)->shift;
-    return $self->data_object($row);
-}
-
-sub source_ids {
-    my $self = shift;
-    my @sources = $self->sources;
-    return map {$_->attr('id')} @sources;
-}
-
-sub sources_by_geo {
-    my ($self, %geo) = @_;
-    my $point = $geo{point} || $self->coordinates(%geo);
-    return grep { 
-        $_->cover_geo->{se}->lat <= $point->lat &&
-        $_->cover_geo->{nw}->lat >= $point->lat &&
-        $_->cover_geo->{nw}->lng <= $point->lng &&
-        $_->cover_geo->{se}->lng >= $point->lng ;
-    } $self->sources;
-}
+sub item_query { '/sources/source[@id="%s"]' }
 
 1;
 
@@ -61,8 +33,8 @@ WWW::MetXML::Source - Data-Source Class for WWW::MetXML
 
     use WWW::MetXML::Source;
     my $wms = WWW::MetXML::Source->new(lang => 'en');  # default lang = 'en'
-    my @sources = $wms->sources;                       # @sources contains WWW::MetXML::Source::Data objects
-    my $amedas  = $wml->source('amedas');              # $amedas is a WWW::MetXML::Source::Data object
+    my @sources = $wms->items;                         # @sources contains WWW::MetXML::Source::Data objects
+    my $amedas  = $wml->item('amedas');                # $amedas is a WWW::MetXML::Source::Data object
     say $amedas->name;                                 # 'AmeDAS(Japan)'
     my $geo   = $amedas->cover_geo;                    # { nw => Geo::Coordinates::Converter::Point, se => Geo::Coordinates::Converter::Point };
     my @avail = $wms->sources_from_geo(                # @avail contains WWW::MetXML::Source::Data objects that coveres specified latitude/longitude point
@@ -93,31 +65,31 @@ URL for API. Default is 'http://pc105.narc.affrc.go.jp/metbroker/sourcelist.xml'
 
 =back
 
-=head2 sources
+=head2 items
 
 Returns all sources as array that contains WWW::MetXML::Source::Data object.
 
-=head2 source
+=head2 item
 
 Returns a WWW::MetXML::Source::Data object that has specified id.
 
-=head2 source_ids
+=head2 item_ids
 
 Returns all source id as array.
 
-=head2 sources_by_geo
+=head2 items_by_geo
 
 Returns sources object that matches specified coordinates.
 
 You may specify coordinates in Geo::Coordinates::Converter::Point object like as following,
 
     my $point = Geo::Coordinates::Converter::Point->new(...);
-    my @matched = $wms->sources_by_geo(point => $point);
+    my @matched = $wms->items_by_geo(point => $point);
 
 Or, like as following.
 
     ### default is datum = 'wgs84', format = 'degree'
-    my @matched = $wms->sources_by_geo(lat => ..., lng => ..., datum => ..., format => ...);
+    my @matched = $wms->items_by_geo(lat => ..., lng => ..., datum => ..., format => ...);
 
 =head1 AUTHOR
 

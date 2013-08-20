@@ -2,6 +2,8 @@ package WWW::MetXML::Region;
 use strict;
 use warnings;
 use parent 'WWW::MetXML::Component';
+use WWW::MetXML::Role::Items;
+use WWW::MetXML::Role::ItemsByGeo;
 
 our $VERSION = 0.01;
 our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/regionlist.xml';
@@ -14,21 +16,8 @@ sub new {
     return $self;
 }
 
-sub regions {
-    my $self = @_;
-    my $regions = $self->{xpath}->find('/regions/source/region');
-    my @rtn;
-    while (my $region = $regions->shift) {
-        push @rtn, $self->data_obejct($region);
-    }
-    return @rtn;
-}
+sub items_query { '/regions/source/region' }
 
-sub region {
-    my ($self, $id) = @_;
-    my $query = sprintf('/regions/source/region[@id="%s"]', $id);
-    my $region = $self->{xpath}->find($query);
-    return $self->data_object($region);
-}
+sub item_query { '/regions/source/region[@id="%s"]' }
 
 1;

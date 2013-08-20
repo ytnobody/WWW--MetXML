@@ -6,12 +6,12 @@ use Geo::Coordinates::Converter::Point;
 
 my $wms = WWW::MetXML::Source->new(lang => 'en');
 isa_ok $wms, 'WWW::MetXML::Source';
-can_ok $wms, qw/sources source source_ids sources_by_geo/;
-is $wms->sources, 17;
+can_ok $wms, qw/items item item_ids items_by_geo/;
+is $wms->items, 17;
 
-my $amedas = $wms->source('amedas');
+my $amedas = $wms->item('amedas');
 isa_ok $amedas, 'WWW::MetXML::Source::Data';
-is join(',', $wms->source_ids), 'aclima,amedas,fieldserver,hitsujigaoka,kanagawa,mamedas,noaa,prefmetdb,snuwdms,wakayama,ThaiFs,sasa,GD-DR&TR,WRDC,fawn,gaemn,oregonIPPC';
+is join(',', $wms->item_ids), 'aclima,amedas,fieldserver,hitsujigaoka,kanagawa,mamedas,noaa,prefmetdb,snuwdms,wakayama,ThaiFs,sasa,GD-DR&TR,WRDC,fawn,gaemn,oregonIPPC';
 
 is $amedas->name, 'AmeDAS(Japan)';
 is_deeply($amedas->cover_geo, +{ 
@@ -21,7 +21,7 @@ is_deeply($amedas->cover_geo, +{
 
 is $amedas->attr('id'), 'amedas';
 
-my @avail = $wms->sources_by_geo(lat => '39.0', lng => '139.0');
+my @avail = $wms->items_by_geo(lat => '39.0', lng => '139.0');
 is join(',', map{$_->name} @avail), 'ACLIMA(Japan),AmeDAS(Japan),Filed Server(Hourly),NOAA/WMO,Global Dataset of DR and TR,Daily Radiation from WRDC';
 
 done_testing;
