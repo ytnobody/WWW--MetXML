@@ -4,6 +4,7 @@ use warnings;
 use WWW::MetXML::Role::Agent;
 use WWW::MetXML::Role::Coordinates;
 use WWW::MetXML::Role::XML;
+use WWW::MetXML::Role::ForceArray;
 use Module::Load ();
 use URI;
 use Carp;

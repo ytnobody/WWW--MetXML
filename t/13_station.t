@@ -37,4 +37,26 @@ is_deeply( $coordinates,
     }, 'Geo::Coordinates::Converter::Point' )
 );
 
+my $area_station = WWW::MetXML::Station->new(
+    area => { 
+        nw => {lat => '36.44', lng => '139.82'}, 
+        se => {lat => '35.55', lng => '140.17'},
+    } 
+);
+isa_ok $area_station, 'WWW::MetXML::Station';
+is $area_station->items, '17';
+is join(',', $area_station->item_ids), '47646,47682,40181,40231,40242,40243,40281,40326,40336,41376,45056,45061,45101,45106,45211,45212,44136';
+my $tsukubasan = $area_station->item('40243');
+isa_ok $tsukubasan, 'WWW::MetXML::Station::Data';
+is $tsukubasan->name, 'Tsukubasan';
+is_deeply($tsukubasan->place, 
+    bless( {
+        datum  => 'wgs84',
+        format => 'degree',
+        height => '868.0',
+        lat    => '36.223331451416016',
+        lng    => '140.10166931152344'
+    }, 'Geo::Coordinates::Converter::Point' )
+);
+
 done_testing;
