@@ -4,7 +4,7 @@
       "narc.affrc.go.jp/metbroker/xml/>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.5.5, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Minilla/v0.6.3, CPAN::Meta::Converter version 2.130880",
    "license" : [
       "perl_5"
    ],
@@ -44,6 +44,7 @@
          "requires" : {
             "Furl" : "0",
             "Geo::Coordinates::Converter" : "0",
+            "Time::Piece" : "0",
             "URI" : "0",
             "XML::XPath" : "0",
             "perl" : "5.008005"
