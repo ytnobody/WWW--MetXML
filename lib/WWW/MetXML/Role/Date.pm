@@ -22,3 +22,36 @@ sub time_piece {
 }
 
 1;
+
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+WWW::MetXML::Role::Date - Date role
+
+=head1 DESCRIPTION
+
+This is a subclass of Exporter that exports date feature
+
+=head1 EXPORTS
+
+=head2 time_piece
+
+    my $time = $self->time_piece('2012/3/2 9:40');
+
+Returns Time::Piece object that wraps specified time string.
+
+=head2 normalize_date
+
+    my $normalized = $self->normalized_date('2012/3/2 9:40'); # '2012/03/02 09:40';
+
+Returns normalized datetime string.
+
+=head1 AUTHOR
+
+ytnobody E<lt>ytnobody@gmail.comE<gt>
+
+=cut
+

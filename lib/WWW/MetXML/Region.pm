@@ -22,3 +22,37 @@ sub items_query { '/regions/source/region' }
 sub item_query { '/regions/source/region[@id="%s"]' }
 
 1;
+
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+WWW::MetXML::Region - regionlist.xml wrapper class for WWW::MetXML
+
+=head1 DESCRIPTION
+
+regionlist.xml (http://pc105.narc.affrc.go.jp/metbroker/regionlist.xml) is API that returns region list.
+
+This class is subclass of L<WWW::MetXML::Component>.
+
+=head1 ROLES
+
+=over 4
+
+=item L<WWW::MetXML::Role::Items>
+
+=item L<WWW::MetXML::Role::ItemsByGeo>
+
+=item L<WWW::MetXML::Role::ForceArray>
+
+=back
+
+=head1 AUTHOR
+
+ytnobody E<lt>ytnobody@gmail.comE<gt>
+
+=cut
+
+

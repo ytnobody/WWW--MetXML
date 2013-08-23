@@ -25,3 +25,30 @@ sub cover_geo {
 }
 
 1;
+
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+WWW::MetXML::Role::Data::CoverGeo - cover coordinates range role
+
+=head1 DESCRIPTION
+
+This is a subclass of Exporter that exports a feature about a coordinates range of data accumulation.
+
+=head1 EXPORTS
+
+=head2 cover_geo
+
+    my $coords_range = $self->cover_geo;
+
+Returns coordinates range as hashref.
+
+=head1 AUTHOR
+
+ytnobody E<lt>ytnobody@gmail.comE<gt>
+
+=cut
+

@@ -21,3 +21,45 @@ sub items_query { '//element' }
 sub item_query { '//element[@id="%s"]' }
 
 1;
+
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+WWW::MetXML::Dataset - dataset.xml wrapper class for WWW::MetXML
+
+=head1 SYNOPSIS
+
+    my $dataset = WWW::MetXML::Dataset->new(
+        source     => 'amedas', 
+        station    => '40336', 
+        interval   => ['2013/08/02 10:00', '2013/08/02 14:00'],
+        elements   => [qw/ airtemperature rain wind /],
+        resolution => 'hourly',
+    );
+    my $temp = $dataset->item('airtemperature'); # $temp isa 'WWW::MetXML::Dataset::Data'
+    say $temp->{Ave}{'2013/08/02 12:00'};        # '25.2'
+
+
+=head1 DESCRIPTION
+
+dataset.xml (http://pc105.narc.affrc.go.jp/metbroker/dataset.xml) is API that returns stored weather data.
+
+This class is subclass of L<WWW::MetXML::Component>.
+
+=head1 ROLES
+
+=over 4
+
+=item L<WWW::MetXML::Role::Items>
+
+=back
+
+=head1 AUTHOR
+
+ytnobody E<lt>ytnobody@gmail.comE<gt>
+
+=cut
+

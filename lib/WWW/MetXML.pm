@@ -13,7 +13,7 @@ use WWW::MetXML::Dataset;
 
 sub AUTOLOAD {
     my ($self, $var) = @_;
-    my $attr = do { my $part = split '::', $AUTOLOAD; pop $part };
+    my $attr = do { my @part = split '::', $AUTOLOAD; pop @part };
     if ($attr =~ /^[a-z]+$/) {
         $self->{$attr} = $var if defined $var;
         return $self->{$attr};
