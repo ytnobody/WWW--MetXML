@@ -30,6 +30,10 @@ sub text {
     return $self->{source}->string_value;
 }
 
+sub value {
+    shift->text;
+}
+
 sub to_string {
     my $self = shift;
     return $self->{source}->toString;
