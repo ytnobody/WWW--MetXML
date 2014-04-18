@@ -20,7 +20,7 @@ is $urahoro->name, 'Urahoro';
 
 my $operational = $urahoro->element('//operational');
 isa_ok $operational, 'WWW::MetXML::Component::Data';
-is $operational->attr('start'), '1976/04/01 0:00:00';
+is $operational->attr('start'), 'Apr 1, 1976 12:00:00 AM';
 
 my @elements = $urahoro->element('//element');
 is join(',', map{$_->attr('id')} @elements), 'air temperature,rain,wind,bright sunlight';
