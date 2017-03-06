@@ -1,4 +1,4 @@
-package WWW::MetXML::Source::Data;
+package WWW::MetXML::SourceList::Data;
 use strict;
 use warnings;
 use parent 'WWW::MetXML::Component::Data';

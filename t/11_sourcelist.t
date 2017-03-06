@@ -1,16 +1,16 @@
 use strict;
 use warnings;
 use Test::More;
-use WWW::MetXML::Source;
+use WWW::MetXML::SourceList;
 use Geo::Coordinates::Converter::Point;
 
-my $wms = WWW::MetXML::Source->new(lang => 'en');
-isa_ok $wms, 'WWW::MetXML::Source';
+my $wms = WWW::MetXML::SourceList->new(lang => 'en');
+isa_ok $wms, 'WWW::MetXML::SourceList';
 can_ok $wms, qw/items item item_ids items_by_geo/;
 is $wms->items, 17;
 
 my $amedas = $wms->item('amedas');
-isa_ok $amedas, 'WWW::MetXML::Source::Data';
+isa_ok $amedas, 'WWW::MetXML::SourceList::Data';
 is join(',', $wms->item_ids), 'aclima,amedas,fieldserver,hitsujigaoka,kanagawa,mamedas,noaa,prefmetdb,snuwdms,wakayama,ThaiFs,sasa,GD-DR&TR,WRDC,fawn,gaemn,oregonIPPC';
 
 is $amedas->name, 'AmeDAS(Japan)';

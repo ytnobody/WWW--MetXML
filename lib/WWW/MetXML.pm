@@ -6,7 +6,7 @@ use warnings;
 our $VERSION = "0.01";
 our $AUTOLOAD;
 
-use WWW::MetXML::Source;
+use WWW::MetXML::SourceList;
 use WWW::MetXML::Region;
 use WWW::MetXML::StationList;
 use WWW::MetXML::Dataset;
@@ -27,7 +27,7 @@ sub new {
 
 sub source {
     my ($self, %opts) = @_;
-    WWW::MetXML::Source->new(%$self, %opts);
+    WWW::MetXML::SourceList->new(%$self, %opts);
 }
 
 sub region {

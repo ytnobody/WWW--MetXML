@@ -1,4 +1,4 @@
-package WWW::MetXML::Source;
+package WWW::MetXML::SourceList;
 use strict;
 use warnings;
 

@@ -48,7 +48,7 @@ These attributes will use as query-parameters when sending request to MetXML API
 
 ## $metxml->source( %attr )
 
-Send request to MetXML API and Returns WWW::MetXML::Source instance. 
+Send request to MetXML API and Returns WWW::MetXML::SourceList instance. 
 
 Arguments will append or overwrite if you specify it in argument.
 
