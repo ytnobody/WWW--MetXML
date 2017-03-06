@@ -1,4 +1,4 @@
-package WWW::MetXML::Station;
+package WWW::MetXML::StationList;
 use strict;
 use warnings;
 use parent 'WWW::MetXML::Component';

@@ -8,7 +8,7 @@ our $AUTOLOAD;
 
 use WWW::MetXML::Source;
 use WWW::MetXML::Region;
-use WWW::MetXML::Station;
+use WWW::MetXML::StationList;
 use WWW::MetXML::Dataset;
 
 sub AUTOLOAD {
@@ -37,7 +37,7 @@ sub region {
 
 sub station {
     my ($self, %opts) = @_;
-    WWW::MetXML::Station->new(%$self, %opts);
+    WWW::MetXML::StationList->new(%$self, %opts);
 }
 
 sub dataset {

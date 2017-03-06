@@ -60,7 +60,7 @@ Arguments will append or overwrite if you specify it in argument.
 
 ## $metxml->station( %attr )
 
-Send request to MetXML API and Returns WWW::MetXML::Station instance. 
+Send request to MetXML API and Returns WWW::MetXML::StationList instance. 
 
 Arguments will append or overwrite if you specify it in argument.
 
