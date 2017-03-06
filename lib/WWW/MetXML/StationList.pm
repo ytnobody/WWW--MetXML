@@ -28,4 +28,13 @@ sub items_query { '//station' }
 
 sub item_query { '//station[@id="%s"]' }
 
+sub data_class {
+    my $self = shift;
+    my $class = ref($self);
+    my $data_class = 'WWW::MetXML::Station::Data';
+    Module::Load::load($data_class) unless $data_class->can('new');
+    return $data_class;
+}
+
+
 1;

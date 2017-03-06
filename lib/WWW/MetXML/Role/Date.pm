@@ -18,7 +18,11 @@ sub normalize_date {
 sub time_piece {
     my ($self, $str) = @_;
     $str = $self->normalize_date($str);
-    return $str =~ m|^[0-9]{4}/[0-9]{2}/[0-9]{2}$| ? Time::Piece->strptime($str, '%Y/%m/%d') : Time::Piece->strptime('%Y/%m/%d %H:%M');
+    return 
+        $str =~ m|^[0-9]{4}/[0-9]{2}/[0-9]{2}$| ? Time::Piece->strptime($str, '%Y/%m/%d') : 
+        $str =~ m|^[0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$| ? Time::Piece->strptime($str, '%Y/%m/%d %H:%M:%S') : 
+        Time::Piece->strptime('%Y/%m/%d %H:%M')
+    ;
 }
 
 1;

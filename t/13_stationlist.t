@@ -14,7 +14,7 @@ isa_ok $amedas_hokkaido, 'WWW::MetXML::StationList';
 like $_, qr/^[0-9]+$/ for $amedas_hokkaido->item_ids;
 
 my $urahoro = $amedas_hokkaido->item('20506');
-isa_ok $urahoro, 'WWW::MetXML::StationList::Data';
+isa_ok $urahoro, 'WWW::MetXML::Station::Data';
 is $urahoro->name, 'Urahoro';
 
 my $operational = $urahoro->element('//operational');

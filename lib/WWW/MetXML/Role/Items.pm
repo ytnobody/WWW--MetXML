@@ -20,7 +20,8 @@ sub items {
 
 sub item {
     my ($self, $id) = @_;
-    my $query = sprintf($self->item_query, $id);
+    my @args = grep {defined $_} $id;
+    my $query = sprintf($self->item_query, @args);
     my $row = $self->{xpath}->find($query)->shift;
     return $self->data_object($row);
 }
