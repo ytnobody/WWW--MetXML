@@ -7,7 +7,7 @@ our @EXPORT = qw/name/;
 
 sub name {
     my $self = shift;
-    my $source = $self->{source};
+    my $source = $self->{source} or return;
     my $childs = $source->getChildNodes;
     for my $child (@$childs) {
         next unless $child->getName;

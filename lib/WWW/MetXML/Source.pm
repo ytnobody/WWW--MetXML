@@ -7,12 +7,12 @@ use WWW::MetXML::Role::Items;
 use WWW::MetXML::Role::ItemsByGeo
 
 our $VERSION = "0.01";
-our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/sourcelist.xml';
+our $FILENAME = 'sourcelist.xml';
 
 sub new {
     my ($class, %opts) = @_;
     my $self = $class->SUPER::new(%opts);
-    my $xml_url = $self->{base_url} || $base_url;
+    my $xml_url = $self->{base_url} || $self->base_url. $FILENAME;
     $self->{xpath} = $self->fetch_xml($xml_url);
     return $self;
 }

@@ -1,10 +1,10 @@
-package WWW::MetXML::Station;
+package WWW::MetXML::AreaStation;
 use strict;
 use warnings;
 use parent 'WWW::MetXML::Component';
 use WWW::MetXML::Role::Items;
 
-our $FILENAME = 'stationlist.xml';
+our $FILENAME = 'areastation.xml';
 
 sub new {
     my ($class, %opts) = @_;

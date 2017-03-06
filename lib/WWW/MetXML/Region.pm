@@ -7,12 +7,12 @@ use WWW::MetXML::Role::ItemsByGeo;
 use WWW::MetXML::Role::ForceArray;
 
 our $VERSION = 0.01;
-our $base_url = 'http://pc105.narc.affrc.go.jp/metbroker/regionlist.xml';
+our $FILENAME = 'regionlist.xml';
 
 sub new {
     my ($class, %opts) = @_;
     my $self = $class->SUPER::new(%opts);
-    my $xml_url = $self->{base_url} || $base_url;
+    my $xml_url = $self->{base_url} || $self->base_url. $FILENAME;
     $self->{xpath} = $self->fetch_xml($xml_url, source => join(',', $self->force_array($self->{source})));
     return $self;
 }

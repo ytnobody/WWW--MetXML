@@ -9,7 +9,7 @@ sub data {
     my $rtn = {};
     my @subelements = $self->element('//subelement');
     for my $subelement ( @subelements ) {
-        my $key = $subelement->attr('id');
+        my $key = $subelement->attr('name');
         my @values = $subelement->element('//value');
         $rtn->{$key} = { map {($self->normalize_date($_->attr('date')) => $_->text)} @values };
     }

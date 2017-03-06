@@ -4,7 +4,8 @@ use warnings;
 use parent 'Exporter';
 
 our $VERSION = "0.01";
-our @EXPORT = qw/items item item_ids/;
+our @EXPORT = qw/items item item_ids base_url/;
+our $BASE_URL = 'http://agrid.diasjp.net/model/metbroker2/';
 
 sub items {
     my $self = shift;
@@ -28,6 +29,11 @@ sub item_ids {
     my $self = shift;
     my @items = $self->items;
     return map {$_->attr('id')} @items;
+}
+
+sub base_url {
+    my $self = shift;
+    return $BASE_URL;
 }
 
 1;
