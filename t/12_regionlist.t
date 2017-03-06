@@ -1,19 +1,19 @@
 use strict;
 use warnings;
 use Test::More;
-use WWW::MetXML::Region;
+use WWW::MetXML::RegionList;
 use Geo::Coordinates::Converter::Point;
 
-my $amedas = WWW::MetXML::Region->new(lang => 'en', source => 'amedas');
-isa_ok $amedas, 'WWW::MetXML::Region';
+my $amedas = WWW::MetXML::RegionList->new(lang => 'en', source => 'amedas');
+isa_ok $amedas, 'WWW::MetXML::RegionList';
 can_ok $amedas, qw/items item item_ids items_by_geo/;
 
 my @items = $amedas->items;
 is @items, 47;
-isa_ok $items[0], 'WWW::MetXML::Region::Data';
+isa_ok $items[0], 'WWW::MetXML::RegionList::Data';
 
 my $item = $amedas->item('02');
-isa_ok $item, 'WWW::MetXML::Region::Data';
+isa_ok $item, 'WWW::MetXML::RegionList::Data';
 is $item->name, 'Aomoriken';
 
 is_deeply($item->cover_geo, {
@@ -21,7 +21,7 @@ is_deeply($item->cover_geo, {
     se => Geo::Coordinates::Converter::Point->new({lat => "40.323333740234375", lng => "141.52166748046875", datum => 'wgs84', format => 'degree' }),
 });
 
-my $thai_fs    = WWW::MetXML::Region->new(source => 'ThaiFs');
+my $thai_fs    = WWW::MetXML::RegionList->new(source => 'ThaiFs');
 my $chonburi   = $thai_fs->item('20');
 my $chantaburi = $thai_fs->item('22');
 
@@ -38,7 +38,7 @@ is_deeply($chantaburi->cover_geo, {
 my @avail = $amedas->items_by_geo(lat => '40.0', lng => '140.55');
 is join(',', map{$_->name} @avail), 'Akitaken';
 
-my $mixed = WWW::MetXML::Region->new(source => [qw/amedas ThaiFs/]);
+my $mixed = WWW::MetXML::RegionList->new(source => [qw/amedas ThaiFs/]);
 is $mixed->items, 75;
 
 done_testing;

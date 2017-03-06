@@ -7,7 +7,7 @@ our $VERSION = "0.01";
 our $AUTOLOAD;
 
 use WWW::MetXML::SourceList;
-use WWW::MetXML::Region;
+use WWW::MetXML::RegionList;
 use WWW::MetXML::StationList;
 use WWW::MetXML::Dataset;
 
@@ -32,7 +32,7 @@ sub source {
 
 sub region {
     my ($self, %opts) = @_;
-    WWW::MetXML::Region->new(%$self, %opts);
+    WWW::MetXML::RegionList->new(%$self, %opts);
 }
 
 sub station {

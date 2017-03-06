@@ -54,7 +54,7 @@ Arguments will append or overwrite if you specify it in argument.
 
 ## $metxml->region( %attr )
 
-Send request to MetXML API and Returns WWW::MetXML::Region instance. 
+Send request to MetXML API and Returns WWW::MetXML::RegionList instance. 
 
 Arguments will append or overwrite if you specify it in argument.
 

@@ -1,4 +1,4 @@
-package WWW::MetXML::Region::Data;
+package WWW::MetXML::RegionList::Data;
 use strict;
 use warnings;
 use parent 'WWW::MetXML::Component::Data';
