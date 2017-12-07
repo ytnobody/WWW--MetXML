@@ -133,7 +133,7 @@ ytnobody E<lt>ytnobody@gmail.comE<gt>
 
 =head1 SEE ALSO
 
-L<http://pc105.narc.affrc.go.jp/metbroker/xml/>
+L<http://agrid.diasjp.net/model/metbroker2/help/metxml.html>
 
 =cut
 
